@@ -2,14 +2,15 @@
     <app-layout>
         <template #header>
             <div class="mx-auto max-w-6xl">
-                <div class="flex justify-between items-center">
+                <div
+                    class="flex flex-col-reverse sm:flex-row justify-between sm:items-center"
+                >
                     <h2 class="text-3xl pb-4">Discover cool events</h2>
-                    <button
-                        type="button"
-                        class="bg-indigo-500 px-4 py-2 text-white rounded-lg"
+                    <a
+                        href="/event/create"
+                        class="inline-block bg-indigo-500 px-4 py-2 text-white rounded-lg"
+                        >Create an event</a
                     >
-                        Create event
-                    </button>
                 </div>
                 <ul class="">
                     <li
@@ -29,8 +30,9 @@
         <div
             class="py-4 mx-auto max-w-6xl grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4"
         >
-            <div
-                class="pb-4 rounded-lg overflow-hidden hover:bg-gray-100"
+            <a
+                :href="`event/${event.id}`"
+                class="block pb-4 rounded-lg overflow-hidden hover:bg-gray-100"
                 v-for="event in events"
                 :key="`event-${event.id}`"
             >
@@ -54,17 +56,19 @@
                         <span>{{ event.start_date }}</span>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
     </app-layout>
 </template>
 
 <script>
 import AppLayout from "@/Layouts/AppLayout";
+// import { Link } from "@inertiajs/inertia-vue3";
 
 export default {
     components: {
         AppLayout,
+        // Link,
     },
     props: ["events"],
 };

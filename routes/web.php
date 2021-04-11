@@ -4,7 +4,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-use App\Models\Event;
+use App\Http\Controllers\EventController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +25,7 @@ Route::get('/', function () {
     ]);
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia::render('Dashboard', [
-        "events" => Event::all()
-    ]);
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [EventController::class, "index"])->name('dashboard');
+Route::resource('event', EventController::class)->only([
+    'show', 'edit', 'create', 'delete'
+]);
