@@ -22,12 +22,14 @@ class CreateEventsTable extends Migration
             $table->string("address", 100)->nullable();
             $table->string("city")->nullable();
             $table->date("start_date")->nullable();
+            $table->date("end_date")->nullable();
             $table->enum("category", ["tour", "sport", "concert", "religious"])->default("tour");
             $table->boolean('featured')->default(false);
             $table->foreignId('user_id')
                 ->constrained("users")
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            $table->softDeletes();
         });
     }
 
