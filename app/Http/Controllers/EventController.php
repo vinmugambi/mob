@@ -12,19 +12,22 @@ use App\Models\Event;
 
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class EventController extends Controller
 {
     public function index()
     {
+        $user_id = Auth::id();
+    
         return Inertia::render('Dashboard', [
-            "events" => Event::all()
+            "events" => Event::where("user_id", "!=", $user_id)->get()
         ]);
     }
 
     public function mine()
     {
-        $user_id = Auth::user()->events;
+        return Inertia::render("event/MyEvents", ["events" => Auth::user()->events]);
     }
 
     public function create()
@@ -38,11 +41,9 @@ class EventController extends Controller
         $event = $request->validated();
         $event["image"]  = $request->file("image")->storePublicly("images");
         Auth::user()->events()->create($event);
-
-        return Auth::user()->events;
-        // return Redirect::route('dashboard')->with('success', 'Contact created.');
+        
+        return Redirect::route('myevents')->with('success', 'Event created.');
     }
-
 
     public function show($id)
     {
@@ -67,7 +68,7 @@ class EventController extends Controller
             $request->validated()
         );
 
-        return Redirect::back()->with('success', 'Contact updated.');
+        return Redirect::back()->with('success', 'Event updated.');
     }
 
     public function destroy($id)
