@@ -26,7 +26,11 @@ class StoreEventRequest extends FormRequest
         return [
             'title' => 'required|unique:events|max:255',
             'description' => 'required|max:1000',
-            'start_date' => 'required|date|after:tomorrow'
+            'start_date' => 'required|string',
+            'end_date' => "required|string",
+            "image" => "required|image",
+            "address" => "required|string",
+            "city" => "required|string"
         ];
     }
 }
