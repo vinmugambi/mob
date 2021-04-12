@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -26,6 +27,9 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [EventController::class, "index"])->name('dashboard');
-Route::resource('event', EventController::class)->only([
-    'show', 'edit', 'create', 'delete', "store"
+Route::middleware(['auth:sanctum', 'verified'])->resource('event', EventController::class)->only([
+    'show', 'edit', 'create', 'destroy', "store"
 ]);
+Route::middleware(['auth:sanctum', 'verified'])->get("/myevents", [EventController::class, "mine"])->name("myevents");
+
+Route::middleware(['auth:sanctum', 'verified'])->resource('booking', BookingController::class)->only(['store', 'destroy', 'index']);

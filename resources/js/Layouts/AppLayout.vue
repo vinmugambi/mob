@@ -20,6 +20,12 @@
                                 <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                                     Discover
                                 </jet-nav-link>
+                                <jet-nav-link :href="route('myevents')" :active="route().current('myevents')">
+                                    My Events
+                                </jet-nav-link>
+                                <jet-nav-link :href="route('booking.index')" :active="route().current('booking.index')">
+                                    My Bookings
+                                </jet-nav-link>
                             </div>
                         </div>
 

@@ -4,10 +4,15 @@
             <h1 class="mx-auto max-w-xl text-3xl">Create a new event</h1>
         </template>
         <form @submit.prevent="create" class="mx-auto max-w-xl">
-            <pre>
-             {{ errors }}
-         </pre
-            >
+            <div class="text-red-500" v-if="Object.keys(errors).length > 0">
+                <p
+                    class="sm"
+                    v-for="(value, name) in errors"
+                    :key="`create-error-${name}`"
+                >
+                    {{ value }}
+                </p>
+            </div>
             <form-factory
                 :value="event"
                 @update="update($event)"

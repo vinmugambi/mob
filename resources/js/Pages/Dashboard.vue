@@ -5,30 +5,13 @@
                 <div
                     class="flex flex-col-reverse sm:flex-row justify-between sm:items-center"
                 >
-                    <h2 class="text-3xl pb-4">Discover cool events</h2>
-                    <a
-                        href="/event/create"
-                        class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition"
-                        >Create an event</a
-                    >
+                    <h2 class="text-3xl">Discover cool events</h2>
                 </div>
-                <ul class="">
-                    <li
-                        class="inline-block rounded-full font-semibold border-2 border-indigo-500 px-4 py1 mr-2"
-                    >
-                        All
-                    </li>
-                    <li
-                        class="inline-block rounded-full font-semibold bg-gray-100 px-4 py1 mr-2 border-2 border-transparent"
-                    >
-                        Nairobi
-                    </li>
-                </ul>
             </div>
         </template>
 
         <div
-            class="py-4 mx-auto max-w-6xl grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4"
+            class="pb-4 mx-auto max-w-6xl grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4"
         >
             <a
                 :href="`event/${event.id}`"
@@ -38,7 +21,7 @@
             >
                 <div class="relative">
                     <img
-                        :src="event.image"
+                        :src="'/'+event.image"
                         class="w-full object-cover"
                         :alt="`Cover image of ${event.title}`"
                     />
@@ -53,7 +36,7 @@
                     <p class="text-lg font-semibold">{{ event.title }}</p>
 
                     <div>
-                        <span>{{ event.start_date }}</span>
+                        <span class="uppercase">{{ formatDate(event.start_time) }}</span>
                     </div>
                 </div>
             </a>
@@ -65,12 +48,22 @@
 import AppLayout from "@/Layouts/AppLayout";
 // import { Link } from "@inertiajs/inertia-vue3";
 
+function formatDate(date) {
+    return new Date(date).toLocaleString("en-GB", {
+        day: "numeric",
+        month: "short",
+    });
+}
+
 export default {
     components: {
         AppLayout,
         // Link,
     },
     props: ["events"],
+    methods: {
+        formatDate(date) {return formatDate(date) }
+    }
 };
 </script>
 
