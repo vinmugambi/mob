@@ -222,7 +222,7 @@
             </header>
 
             <!-- Page Content -->
-            <main>
+            <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 pb-8 md:pb-16">
                 <slot></slot>
             </main>
         </div>
