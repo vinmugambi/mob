@@ -11,7 +11,7 @@ class Event extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ["title","start_date", "end_date","address","city","description","image", "user_id"];
+    protected $fillable = ["title","start_time", "end_time","address","city","description","image", "user_id"];
 
     public function owner() {
         return $this->belongsTo(User::class);

@@ -42,15 +42,15 @@ export default {
                     component: "text",
                     model: "title",
                 },
-                start_date: {
+                start_time: {
                     label: "Time event starts",
                     component: "date",
-                    model: "start_date",
+                    model: "start_time",
                 },
-                end_date: {
+                end_time: {
                     label: "When the event ends",
                     component: "date",
-                    model: "end_date",
+                    model: "end_time",
                 },
                 description: {
                     label: "Description",
@@ -77,8 +77,8 @@ export default {
                 title: "",
                 description: "",
                 image: "",
-                start_date: new Date(),
-                end_date: new Date(),
+                start_time: new Date(),
+                end_time: new Date(),
                 city: "",
                 address: "",
             },
