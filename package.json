@@ -25,5 +25,15 @@
         "tailwindcss": "^2.0.1",
         "vue": "^3.0.5",
         "vue-loader": "^16.1.2"
+    },
+    "dependencies": {
+        "@oruga-ui/oruga-next": "^0.3.5",
+        "luxon": "^1.26.0",
+        "quasar": "^1.15.10",
+        "vee-validate": "^3.4.5",
+        "vue-datetime": "^1.0.0-beta.14",
+        "vue-tailwind": "^2.2.0",
+        "vue3-datepicker": "^0.2.4",
+        "weekstart": "^1.1.0"
     }
 }
