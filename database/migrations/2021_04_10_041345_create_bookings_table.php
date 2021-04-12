@@ -17,11 +17,11 @@ class CreateBookingsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId("user_id")
-                ->constrained("user")
+                ->constrained("users")
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->foreignId("event_id")
-                ->constrained("event")
+                ->constrained("events")
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
