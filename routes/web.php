@@ -27,5 +27,5 @@ Route::get('/', function () {
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [EventController::class, "index"])->name('dashboard');
 Route::resource('event', EventController::class)->only([
-    'show', 'edit', 'create', 'delete'
+    'show', 'edit', 'create', 'delete', "store"
 ]);

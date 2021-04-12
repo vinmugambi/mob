@@ -11,11 +11,13 @@ class Event extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $fillable = ["title","start_date", "end_date","address","city","description","image", "user_id"];
+
     public function owner() {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function bookings() {
-        $this->hasMany(Booking::class);
+       return $this->hasMany(Booking::class);
     }
 }

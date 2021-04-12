@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 
@@ -33,11 +34,13 @@ class EventController extends Controller
 
     public function store(StoreEventRequest $request)
     {
-        Auth::user()->events()->create(
-            $request->validated()
-        );
 
-        return Redirect::route('dashboard')->with('success', 'Contact created.');
+        $event = $request->validated();
+        $event["image"]  = $request->file("image")->storePublicly("images");
+        Auth::user()->events()->create($event);
+
+        return Auth::user()->events;
+        // return Redirect::route('dashboard')->with('success', 'Contact created.');
     }
 
 
