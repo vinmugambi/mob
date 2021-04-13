@@ -3,29 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BookingRequest;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 use App\Models\Booking;
+use App\Models\Event;
+use Illuminate\Support\Facades\Redirect;
 
 class BookingController extends Controller
 {
-    use RefreshDatabase;
-
     public function index()
     {
-        // return Inertia::render("event/Bookings", [
-        //     "events" => Auth::user()->bookings()->event
-        // ]);
-
         $bookings = Auth::user()->bookings;
         $booked_events = array();
-        return $bookings;
 
-        //         foreach($bookings as $booking) {
-        // $booked_events[$key] = Booking::find($bookins[$key])
-        //         }
+        foreach ($bookings as $booking) {
+            $event = Event::where("id", $booking["event_id"])->first();
+            $event["booking_id"] = $booking["id"];
+            array_push($booked_events, $event);
+        }
+
+        return Inertia::render('event/Bookings', [
+            "events" => $booked_events,
+
+        ]);
     }
 
     public function store(BookingRequest $request)
@@ -37,16 +38,17 @@ class BookingController extends Controller
         $booking->user_id = Auth::id();
 
         $booking->save();
+        return Redirect::back()->with('success', 'Event booked');
+
     }
 
-    public function destroy(BookingRequest $request)
+    public function destroy($id)
     {
-        $booking_id = $request->validated()["id"];
-        $event = Event::find($booking_id);
-
-        if (!Gate::allows('update-event', $event)) {
+        $booking = Booking::find($id);
+        if (!Gate::allows('cancel-booking', $booking)) {
             abort(403);
         }
-        $event->delete();
+        $booking->delete();
+        return Redirect::route("booking.index")->with('success', 'Event booking cancelled');
     }
 }

@@ -2,21 +2,9 @@
     <app-layout>
         <template #header>
             <div class="mx-auto max-w-6xl">
-                <div
-                    class="flex flex-col-reverse sm:flex-row justify-between sm:items-center"
-                >
-                    <h2 class="text-3xl">My events</h2>
-
-                    <a
-                        href="/event/create"
-                        class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition"
-                        >Create an event</a
-                    >
-                </div>
-                <p>A list of events you have created</p>
+                <h2 class="text-3xl">Events you have booked</h2>
             </div>
         </template>
-
         <div
             class="pb-4 mx-auto max-w-6xl grid grid-cols-1 sm:grid-cols-2 gap-4"
         >
@@ -46,23 +34,16 @@
                     >
 
                     <div>
-                        <span class="uppercase">{{
-                            formatDate(event.start_time)
-                        }}</span>
+                        <span class="uppercase">{{ event.start_time }}</span>
                     </div>
 
                     <div class="mt-auto">
-                        <a
-                            class="inline-flex items-center mr-2 px-4 py-1 bg-gray-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition"
-                            :href="`event/${event.id}/edit`"
-                            >Edit</a
-                        >
                         <button
                             type="button"
-                            @click="deleteEvent(event.id)"
+                            @click="cancel(event.booking_id)"
                             class="inline-flex items-center mt-auto px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-grey-800 uppercase tracking-widest hover:bg-red-200 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition"
                         >
-                            Delete
+                            Cancel this booking
                         </button>
                     </div>
                 </div>
@@ -73,34 +54,15 @@
 
 <script>
 import AppLayout from "@/Layouts/AppLayout";
-import { Inertia } from '@inertiajs/inertia';
-
-function formatDate(date) {
-    return new Date(date).toLocaleString("en-GB", {
-        day: "numeric",
-        month: "short",
-    });
-}
+import { Inertia } from "@inertiajs/inertia";
 
 export default {
-    components: {
-        AppLayout,
-    },
     props: ["events"],
+    components: { AppLayout },
     methods: {
-        formatDate(date) {
-            return formatDate(date);
+        cancel(id) {
+            Inertia.delete(`/booking/${id}`);
         },
-        deleteEvent(id) {
-            Inertia.delete(`/event/${id}`);
-        }
     },
 };
 </script>
-
-<style lang="css" scoped>
-.location {
-    backdrop-filter: blur(10px);
-    background: #00000030;
-}
-</style>

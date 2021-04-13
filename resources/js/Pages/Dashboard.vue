@@ -46,14 +46,7 @@
 
 <script>
 import AppLayout from "@/Layouts/AppLayout";
-// import { Link } from "@inertiajs/inertia-vue3";
-
-function formatDate(date) {
-    return new Date(date).toLocaleString("en-GB", {
-        day: "numeric",
-        month: "short",
-    });
-}
+import {formatDate} from "./../utils.js"
 
 export default {
     components: {
