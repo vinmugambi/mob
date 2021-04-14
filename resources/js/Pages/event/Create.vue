@@ -51,11 +51,19 @@ export default {
                     label: "Time event starts",
                     component: "date",
                     model: "start_time",
+                    attrs: {
+                        min: new Date(),
+                        max: null,
+                    },
                 },
                 end_time: {
                     label: "When the event ends",
                     component: "date",
                     model: "end_time",
+                    attrs: {
+                        min: new Date(),
+                        max: null,
+                    },
                 },
                 description: {
                     label: "Description",
@@ -82,12 +90,28 @@ export default {
                 title: "",
                 description: "",
                 image: "",
-                start_time: new Date(),
-                end_time: new Date(),
+                start_time: null,
+                end_time: null,
                 city: "",
                 address: "",
             },
         };
+    },
+    watch: {
+        start_time: function (val) {
+            if (!this.end_time || new Date(this.end_time).getTime() < new Date(val).getTime()) {
+                this.end_time = new Date(val) + (15*60*1000);
+            }
+            this.formSchema.end_time.min = val;
+
+            console.log(this.end_time, this.formSchema.end_time.min);
+        },
+        end_time: function (val) {
+            if (!this.start_time || new Date(this.starttime).getTime() > new Date(val).getTime()) {
+                this.start_time = new Date(val) - (15*60*1000);
+            }
+            this.formSchema.start_time.max = val;
+        },
     },
     methods: {
         safeId(field) {

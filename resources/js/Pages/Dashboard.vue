@@ -22,7 +22,7 @@
                 <div class="relative">
                     <img
                         :src="'/'+event.image"
-                        class="w-full object-cover"
+                        class="w-full object-cover h-44"
                         :alt="`Cover image of ${event.title}`"
                     />
                     <div

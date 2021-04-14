@@ -28,7 +28,7 @@
                 <div class="relative">
                     <img
                         :src="'/' + event.image"
-                        class="w-full object-cover"
+                        class="w-full object-cover h-36"
                         :alt="`Cover image of ${event.title}`"
                     />
                     <div
@@ -73,7 +73,7 @@
 
 <script>
 import AppLayout from "@/Layouts/AppLayout";
-import { Inertia } from '@inertiajs/inertia';
+import { Inertia } from "@inertiajs/inertia";
 
 function formatDate(date) {
     return new Date(date).toLocaleString("en-GB", {
@@ -93,7 +93,7 @@ export default {
         },
         deleteEvent(id) {
             Inertia.delete(`/event/${id}`);
-        }
+        },
     },
 };
 </script>
