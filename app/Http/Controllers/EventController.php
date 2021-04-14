@@ -100,7 +100,7 @@ class EventController extends Controller
             "event" => $event,
             "booking" => $this->user_booking_for_this_event($id),
             "bookings" => $this->bookings_count($id, $event["user_id"]),
-            "owner"=> User::find($event["user_id"])
+            "owner" => User::find($event["user_id"])
         ]);
     }
 
@@ -118,7 +118,7 @@ class EventController extends Controller
             abort(403);
         }
 
-        return $event->update(
+        $event->update(
             $request->validated()
         );
 

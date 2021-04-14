@@ -6,7 +6,7 @@
                     <div class="col-span-2">
                         <img
                             class="w-full object-cover"
-                            :src="'/' + event.image"
+                            :src="event.image"
                             :alt="'banner image for ' + event.title + ' events'"
                         />
                     </div>

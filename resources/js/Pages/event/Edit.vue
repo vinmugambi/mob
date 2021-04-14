@@ -51,11 +51,19 @@ export default {
                     label: "Time event starts",
                     component: "date",
                     model: "start_time",
+                    attrs: {
+                        min: new Date(),
+                        max: null,
+                    },
                 },
                 end_time: {
                     label: "When the event ends",
                     component: "date",
                     model: "end_time",
+                    attrs: {
+                        min: new Date(),
+                        max: null,
+                    },
                 },
                 description: {
                     label: "Description",

@@ -19510,12 +19510,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         start_time: {
           label: "Time event starts",
           component: "date",
-          model: "start_time"
+          model: "start_time",
+          attrs: {
+            min: new Date(),
+            max: null
+          }
         },
         end_time: {
           label: "When the event ends",
           component: "date",
-          model: "end_time"
+          model: "end_time",
+          attrs: {
+            min: new Date(),
+            max: null
+          }
         },
         description: {
           label: "Description",
@@ -23244,7 +23252,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
           "class": "block pb-4 rounded-lg overflow-hidden hover:bg-gray-100",
           key: "event-".concat(event.id)
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
-          src: '/' + event.image,
+          src: event.image,
           "class": "w-full object-cover h-44",
           alt: "Cover image of ".concat(event.title)
         }, null, 8
@@ -24551,7 +24559,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "class": "grid grid-cols-2 gap-4 rounded-lg overflow-hidden bg-gray-100",
           key: "event-".concat(event.id)
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
-          src: '/' + event.image,
+          src: event.image,
           "class": "w-full object-cover h-36",
           alt: "Cover image of ".concat(event.title)
         }, null, 8
@@ -24818,7 +24826,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
           "class": "grid grid-cols-2 gap-4 rounded-lg overflow-hidden bg-gray-100",
           key: "event-".concat(event.id)
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
-          src: '/' + event.image,
+          src: event.image,
           "class": "w-full object-cover h-36",
           alt: "Cover image of ".concat(event.title)
         }, null, 8
@@ -24966,7 +24974,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
         "class": "w-full object-cover",
-        src: '/' + $props.event.image,
+        src: $props.event.image,
         alt: 'banner image for ' + $props.event.title + ' events'
       }, null, 8
       /* PROPS */
