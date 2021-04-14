@@ -22,16 +22,6 @@ class EventFactory extends Factory
 
     public function definition()
     {
-        return [
-            "title" => $this->faker->sentence(),
-            "description" => $this->faker->text(),
-            "image" => $this->faker->imageUrl(),
-            "address" => $this->faker->randomElement(["Kasarani Sports stadium", "Nairobi national park", "Karura forest", "Carnivore grounds"]),
-            "city" => "Nairobi",
-            "start_date" => $this->faker->dateTimeThisMonth(),
-            "category" => $this->faker->randomElement(["tour", "sport", "concert", "religious"]),
-            "featured" => $this->faker->randomElement([true, false]),
-            "user_id" => 1
-        ];
+       
     }
 }
