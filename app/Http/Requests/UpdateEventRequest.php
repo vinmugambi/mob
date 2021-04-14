@@ -24,7 +24,13 @@ class UpdateEventRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'nullable|unique:events|max:255',
+            'description' => 'nullable|string|max:1000',
+            'start_time' => 'nullable|string',
+            'end_time' => "nullable|string",
+            "image" => "nullable|image",
+            "address" => "nullable|string",
+            "city" => "nullable|string"
         ];
     }
 }

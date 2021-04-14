@@ -1,31 +1,27 @@
 <template>
-    <datepicker
+    <!-- <date-time-picker
         v-model="date"
         :lowerLimit="minDate"
         inputFormat="dd-MM-yyyy"
-    ></datepicker>
+    ></date-time-picker> -->
+      <o-datetimepicker v-model="date" inline></o-datetimepicker>
+
 </template>
 
 <script>
-import Datepicker from "vue3-datepicker";
-
+import { Datetimepicker } from "@oruga-ui/oruga";
 export default {
-    components: { Datepicker },
     props: ["value", "error"],
+    components: { Datetimepicker },
     computed: {
         date: {
             get() {
                 return this.value || new Date();
             },
             set(value) {
-                this.$emit("update", value)
+                this.$emit("update", value);
             },
         },
-    },
-    data() {
-        return {
-            minDate: new Date(),
-        };
     },
 };
 </script>

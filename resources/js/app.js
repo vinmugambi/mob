@@ -6,6 +6,9 @@ import {
 } from "@inertiajs/inertia-vue3";
 import { InertiaProgress } from "@inertiajs/progress";
 
+import Oruga from '@oruga-ui/oruga-next'
+import "@oruga-ui/oruga-next/dist/oruga.css";
+
 const el = document.getElementById("app");
 
 createApp({
@@ -17,6 +20,7 @@ createApp({
 })
     .mixin({ methods: { route } })
     .use(InertiaPlugin)
+    .use(Oruga)
     .mount(el);
 
 InertiaProgress.init({ color: "#4B5563" });

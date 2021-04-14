@@ -76,7 +76,7 @@
                             <div class="pl-6 border-l">
                                 <div>Starts at {{ startTime }}</div>
                                 <div>
-                                    lasts {{ eventDuration }}
+                                    Lasts {{ eventDuration }}
                                     {{ eventDuration > 1 ? "hours" : "hour" }}
                                 </div>
                             </div>

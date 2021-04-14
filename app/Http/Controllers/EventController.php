@@ -118,11 +118,11 @@ class EventController extends Controller
             abort(403);
         }
 
-        $event->update(
+        return $event->update(
             $request->validated()
         );
 
-        return Redirect::back()->with('success', 'Event updated.');
+        return Redirect::route("myevents")->with('success', 'Event updated.');
     }
 
     public function destroy($id)
