@@ -14,6 +14,7 @@ use App\Models\User;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
@@ -75,7 +76,8 @@ class EventController extends Controller
     {
 
         $event = $request->validated();
-        $event["image"]  = $request->file("image")->storePublicly("images");
+        $path = $request->file('image')->storePublicly('avatars', 's3');
+        $event["image"] = Storage::disk("s3")->url($path);
         Auth::user()->events()->create($event);
 
         return Redirect::route('myevents')->with('success', 'Event created.');
@@ -113,14 +115,18 @@ class EventController extends Controller
     public function update(UpdateEventRequest $request, $id)
     {
         $event = Event::find($id);
+        $event_update_req = $request->validated();
+
 
         if (!Gate::allows('update-event', $event)) {
             abort(403);
         }
+        if ($event_update_req["image"]) {
+            $path = $request->file('image')->storePublicly('avatars', 's3');
+            $event_update_req["image"] = Storage::disk("s3")->url($path);
+        }
 
-        $event->update(
-            $request->validated()
-        );
+        $event->update($event_update_req);
 
         return Redirect::route("myevents")->with('success', 'Event updated.');
     }
